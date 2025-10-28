@@ -1,11 +1,13 @@
 import pygame
+import random
 from config.utils import *
 
-def hill_climbing_algorithm(draw, grid, start, end, delay=25):
+def Steepest_Ascent(draw, grid, start, end, delay=25):
     came_from = {}
     current = start
     path_nodes = {start}
     current_h = h(start.get_pos(), end.get_pos())
+    print("Leo đồi cực dốc...")
 
     while True:
         for event in pygame.event.get():
@@ -18,7 +20,8 @@ def hill_climbing_algorithm(draw, grid, start, end, delay=25):
             end.make_end()
             return True
 
-        best_neighbor = None
+        # tìm neighbor có heuristic nhỏ nhất
+        best_neighbors = []
         min_h = current_h
 
         for neighbor in current.neighbors:
@@ -26,12 +29,18 @@ def hill_climbing_algorithm(draw, grid, start, end, delay=25):
                 neighbor_h = h(neighbor.get_pos(), end.get_pos())
                 if neighbor_h < min_h:
                     min_h = neighbor_h
-                    best_neighbor = neighbor
+                    best_neighbors = [neighbor]  # reset danh sách
+                elif neighbor_h == min_h:
+                    best_neighbors.append(neighbor)  # thêm nếu bằng min_h
 
-        if best_neighbor is None:
+        # không có neighbor tốt hơn → mắc kẹt
+        if not best_neighbors:
             current.make_closed()
             draw()
             return False
+
+        # 🔀 chọn ngẫu nhiên 1 neighbor trong các ứng viên tốt nhất
+        best_neighbor = random.choice(best_neighbors)
 
         came_from[best_neighbor] = current
         current = best_neighbor

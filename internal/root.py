@@ -1,13 +1,21 @@
-from .SteepestAscent import *
+from .Algorithm.SteepestAscent import *
 from config.utils import *
 import pygame
+from .Algorithm.Simple import *
+from .Algorithm.Stochastic import *
+from .Algorithm.SidewaysMoves import *
+from config.config import *
 
-WIDTH = 800
+
+conf = Config()
+
+WIDTH = conf.SCREEN_WIDTH
+
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("Tìm Đường Về Nhà - Hill Climbing")
 
 def root(win=WIN, width=WIDTH):
-    ROWS = 20  # đặt >=20 để có nhiều node
+    ROWS = conf.ROW
     grid = make_grid(ROWS, width)
 
     start = None
@@ -52,18 +60,17 @@ def root(win=WIN, width=WIDTH):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
-                    print("Đang tìm đường bằng LEO ĐỒI (Hill Climbing)...")
                     started = True
                     for row in grid:
                         for node in row:
                             node.update_neighbors(grid)
 
-                    found = hill_climbing_algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    found = Sideways(lambda: draw(win, grid, ROWS, width), grid, start, end)
 
                     if not found:
                         print("BỊ MẮC KẸT! Không thể tìm thấy đường.")
                     else:
-                        print("Đã tìm thấy nhà! (Trường hợp rất may mắn)")
+                        print("Đã tìm thấy nhà!")
                     started = False
 
                 if event.key == pygame.K_c:
