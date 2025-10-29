@@ -15,7 +15,7 @@ conf = Config()
 WIDTH = conf.SCREEN_WIDTH  # kích thước vùng lưới (vuông)
 TOP_UI_HEIGHT = 50
 BOTTOM_UI_HEIGHT = 50
-TOTAL_RIGHT_PANEL = 300   # panel bên phải (không vẽ lưới vào đây)
+TOTAL_RIGHT_PANEL = 350   # panel bên phải (không vẽ lưới vào đây)
 WIN_HEIGHT = WIDTH + TOP_UI_HEIGHT + BOTTOM_UI_HEIGHT
 TOTAL_WIDTH = WIDTH + TOTAL_RIGHT_PANEL
 
@@ -23,10 +23,6 @@ TOTAL_WIDTH = WIDTH + TOTAL_RIGHT_PANEL
 #cònig cho cua so
 WIN = pygame.display.set_mode((TOTAL_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption("Tim Duong Ve Nha - Hill Climbing")
-
-
-
-
 
 
 def root(win=WIN, width=WIDTH):
@@ -87,6 +83,22 @@ def root(win=WIN, width=WIDTH):
         win.blit(grid_surf, (0, TOP_UI_HEIGHT))
         # panel phải (hiện trắng, bạn có thể vẽ thông tin ở đây)
         pygame.draw.rect(win, BG_COLOR, (width, TOP_UI_HEIGHT, TOTAL_RIGHT_PANEL, width))
+
+        controls_x = width + 25
+        controls_y = TOP_UI_HEIGHT + 20
+        line_spacing = 28
+
+        controls_text = [
+            "Controls",
+            "Left Click: Set Start, End, or draw Walls",
+            "Right Click: Delete a cell",
+            "Press C: Clear the entire map",
+        ]
+        for i, line in enumerate(controls_text):
+            color = BLACK
+            text_surf = FONT.render(line, True, color)
+            win.blit(text_surf, (controls_x, controls_y + i * line_spacing))
+
         # vẽ các nút phía dưới
         for i, rect in enumerate(buttons):
             draw_button(win, rect, button_texts[i], button_colors[i])
