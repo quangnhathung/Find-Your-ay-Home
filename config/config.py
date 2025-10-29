@@ -12,3 +12,4 @@ class Config:
         self.SidewaysMoves = int(os.getenv("MAX_SIDEWAY_MOVE", 2))
         self.SCREEN_WIDTH = int(os.getenv("SCREEN_WIDTH", 800))
         self.ROW = int(os.getenv("MATRIX", 15))
+        self.BG_COLOR = os.getenv("BG_COLOR", "FFFFFF")
