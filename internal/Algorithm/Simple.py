@@ -1,7 +1,7 @@
 import pygame
 from config.utils import *
 
-def simple_hill_climbing_algorithm(draw, grid, start, end, delay=25):
+def Simple(draw, grid, start, end, delay=25):
     """
     Simple Hill Climbing:
     - Chọn neighbor đầu tiên có h(neighbor, end) < h(current, end)

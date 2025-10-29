@@ -8,6 +8,7 @@ def h(p1, p2):
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
 
+
 def reconstruct_path(came_from, current, draw):
     while current in came_from:
         current = came_from[current]
@@ -33,17 +34,18 @@ def draw_grid_lines(win, rows, width):
     for j in range(rows):
         pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))
 
-def draw(win, grid, rows, width):
-    win.fill(WHITE)
-    for row in grid:
-        for node in row:
-            node.draw(win)
-    draw_grid_lines(win, rows, width)
-    pygame.display.update()
-
 def get_clicked_pos(pos, rows, width):
     gap = width // rows
-    x, y = pos  # sửa: x ngang, y dọc
+    x, y = pos  # x ngang, y dọc
     row = y // gap
     col = x // gap
     return row, col
+
+pygame.font.init()
+FONT = pygame.font.SysFont(None, 24)
+
+def draw_button(win, rect, text, color):
+    pygame.draw.rect(win, color, rect, border_radius=6)
+    text_surf = FONT.render(text, True, BLACK)
+    text_rect = text_surf.get_rect(center=rect.center)
+    win.blit(text_surf, text_rect)

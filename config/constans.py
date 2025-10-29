@@ -10,3 +10,4 @@ BLACK = (0, 0, 0)       # Tường (Barrier)
 PURPLE = (128, 0, 128)  # Đường đi (Path)
 ORANGE = (255, 165, 0)  # Đang dò
 GREY = (128, 128, 128)
+LIGHT_BLUE = (173, 216, 230)
