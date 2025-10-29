@@ -89,10 +89,10 @@ def root(win=WIN, width=WIDTH):
         line_spacing = 28
 
         controls_text = [
-            "Controls",
-            "Left Click: Set Start, End, or draw Walls",
-            "Right Click: Delete a cell",
-            "Press C: Clear the entire map",
+            "Controls:",
+            "  Left Click: Set Start, End, or draw Walls",
+            "  Right Click: Delete a cell",
+            "  Press C: Clear the entire map",
         ]
         for i, line in enumerate(controls_text):
             color = BLACK
