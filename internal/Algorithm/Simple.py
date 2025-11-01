@@ -18,13 +18,13 @@ def Simple(draw, grid, start, end, delay=25):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                return False
+                return False, current_h, current
 
         # nếu đã tới đích
         if current == end:
             reconstruct_path(came_from, end, draw)
             end.make_end()
-            return True
+            return True, current_h, current
 
         # tìm neighbor đầu tiên tốt hơn (heuristic nhỏ hơn)
         found_better = False
@@ -49,7 +49,7 @@ def Simple(draw, grid, start, end, delay=25):
         if not found_better:
             current.make_closed()
             draw()
-            return False
+            return False, current_h, current
 
         # vẽ và chờ 1 khoảng
         draw()

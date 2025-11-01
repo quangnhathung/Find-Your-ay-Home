@@ -80,7 +80,7 @@ def _get_scaled_image(name: str, size: int) -> Optional[pygame.Surface]:
 
 # ---------- Class Node ----------
 class Node:
-    def __init__(self, row, col, width, total_rows):
+    def __init__(self, row, col, width, total_rows, is_null=False):
         self.row = row
         self.col = col
         # chuẩn hoá: x = col * width (ngang), y = row * width (dọc)
@@ -91,6 +91,7 @@ class Node:
         self.neighbors = []
         self.width = width
         self.total_rows = total_rows
+        self._is_null = is_null
 
     def get_pos(self):
         return self.row, self.col

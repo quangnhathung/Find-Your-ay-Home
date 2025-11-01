@@ -175,23 +175,28 @@ def root(win=WIN, width=WIDTH):
                             # chạy thuật toán
                             started = True
                             message = ""
+                            
                             redraw_all()
                             for r in grid:
                                 for node in r:
                                     node.update_neighbors(grid)
 
                             found = False
+                            current_node = Node(-1, -1, 0, 0, is_null=True);
+                            current_heuristic = 0;
+
                             if algo_name == "Stochastic":
-                                found = Stochastic(algo_draw, grid, start, end)
+                                found, current_heuristic, current_node = Stochastic(algo_draw, grid, start, end)
                             elif algo_name == "Sideways":
-                                found = Sideways(algo_draw, grid, start, end)
+                                found, current_heuristic, current_node = Sideways(algo_draw, grid, start, end)
                             elif algo_name == "Simple":
-                                found = Simple(algo_draw, grid, start, end)
+                                found, current_heuristic, current_node = Simple(algo_draw, grid, start, end)
                             elif algo_name == "Steepest Ascent":
-                                found = Steepest_Ascent(algo_draw, grid, start, end)
+                                found, current_heuristic, current_node = Steepest_Ascent(algo_draw, grid, start, end)
 
                             if not found:
-                                message = f"BI MAC KET! Khong the tim thay duong voi {algo_name}."
+                                node_x, node_y =  current_node.get_pos();
+                                message = f"Bi mat ket tai ({node_x +1},{node_y +1}) va heuristic hien tai la {current_heuristic}"
                             else:
                                 message = f"Da tim thay nha voi {algo_name}!"
                             started = False
@@ -223,7 +228,3 @@ def root(win=WIN, width=WIDTH):
         redraw_all()
 
     pygame.quit()
-
-
-if __name__ == "__main__":
-    root()
