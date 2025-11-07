@@ -30,33 +30,22 @@ def is_ancestor(node, maybe_ancestor, came_from) -> bool:
 
 
 def reconstruct_path(came_from, current, draw):
-    """
-    Robust reconstruct: walk backward from `current` (usually end) and mark all parents as path.
-    - If a parent is flagged, clear flag visuals before making path.
-    - If a parent is already path, re-mark it and continue.
-    - Stop when parent is missing or parent is start or a cycle is detected.
-    """
     visited = set()
     node = current
 
     while True:
         parent = came_from.get(node, None)
         if parent is None:
-            # reached node without a parent -> stop
             break
 
-        # detect cycle
         if parent in visited:
             break
         visited.add(parent)
 
-        # if parent is start, we don't color the start as path; stop after stepping to it
         if parent.is_start():
             break
 
-        # clear flag visual if necessary so path will be shown
         if parent.is_flag():
-            # prefer a reset() method if available; otherwise clear file & color
             try:
                 parent.reset()
             except Exception:
@@ -65,7 +54,6 @@ def reconstruct_path(came_from, current, draw):
                 except Exception:
                     pass
 
-        # ensure path always overwrites previous visuals
         try:
             parent.make_path()
         except Exception:
@@ -78,7 +66,6 @@ def reconstruct_path(came_from, current, draw):
 
         draw()
 
-        # continue walking
         node = parent
 
 

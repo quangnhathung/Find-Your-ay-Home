@@ -6,10 +6,6 @@ from config.utils import *
 
 
 def RandomRestart(draw, grid, start, end, delay=DELAY, max_restarts=MAX_RESTART):
-    """
-    Random Restart Hill Climbing (đơn giản, không kiểm tra chu kỳ, không vẽ lại đường).
-    Khi bị kẹt thì đánh dấu flag và restart từ một ô lân cận không phải tường hoặc flag.
-    """
 
     message=""
     ClearOldPath(grid)

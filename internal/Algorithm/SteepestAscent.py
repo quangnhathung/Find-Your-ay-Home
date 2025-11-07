@@ -41,7 +41,7 @@ def Steepest_Ascent(draw, grid, start, end, delay=DELAY):
             draw()
             return False, current_h, current, message
 
-        # 🔀 chọn ngẫu nhiên 1 neighbor trong các ứng viên tốt nhất
+        #chọn ngẫu nhiên 1 neighbor trong các ứng viên tốt nhất
         best_neighbor = random.choice(best_neighbors)
 
         came_from[best_neighbor] = current
