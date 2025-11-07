@@ -4,15 +4,14 @@ import pygame
 
 # Hàm tiện ích
 def h(p1, p2):
-    # heuristic Manhattan
+    # Manhattan
     x1, y1 = p1
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
 
 
-# helper: check whether `maybe_ancestor` is in the ancestor chain of `node`
+# helper
 def is_ancestor(node, maybe_ancestor, came_from) -> bool:
-    """Return True if maybe_ancestor appears in the chain of parents starting from node."""
     cur = node
     seen = set()
     while True:
@@ -26,6 +25,9 @@ def is_ancestor(node, maybe_ancestor, came_from) -> bool:
             return False
         seen.add(parent)
         cur = parent
+
+
+
 
 def reconstruct_path(came_from, current, draw):
     """
