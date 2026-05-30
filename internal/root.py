@@ -168,7 +168,7 @@ def root(win=WIN, width=WIDTH):
 
         successes = {name: 0 for name, _ in algos}
 
-        # helper: kiểm tra node có phải wall không (tương thích nhiều implement)
+        # helper
         def node_is_wall(n):
             try:
                 # nếu class có method is_wall()
